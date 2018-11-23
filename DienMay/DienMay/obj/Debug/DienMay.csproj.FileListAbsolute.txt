@@ -1,0 +1,13 @@
+D:\KI_5\C#\DoAn\ProjectLTUD_S2\DienMay\DienMay\bin\Debug\DienMay.exe
+D:\KI_5\C#\DoAn\ProjectLTUD_S2\DienMay\DienMay\bin\Debug\DienMay.pdb
+D:\KI_5\C#\DoAn\ProjectLTUD_S2\DienMay\DienMay\obj\Debug\DienMay.csprojResolveAssemblyReference.cache
+D:\KI_5\C#\DoAn\ProjectLTUD_S2\DienMay\DienMay\obj\Debug\DienMay.Properties.Resources.resources
+D:\KI_5\C#\DoAn\ProjectLTUD_S2\DienMay\DienMay\obj\Debug\DienMay.csproj.GenerateResource.Cache
+D:\KI_5\C#\DoAn\ProjectLTUD_S2\DienMay\DienMay\obj\Debug\DienMay.exe
+D:\KI_5\C#\DoAn\ProjectLTUD_S2\DienMay\DienMay\obj\Debug\DienMay.pdb
+D:\KI_5\C#\DoAn\ProjectLTUD_S2\DienMay\DienMay\obj\Debug\DienMay.QuanLySP.resources
+D:\KI_5\C#\DoAn\ProjectLTUD_S2\DienMay\DienMay\obj\Debug\DienMay.ThemSanPham.resources
+D:\KI_5\C#\DoAn\ProjectLTUD_S2\DienMay\DienMay\obj\Debug\DienMay.FrmQuanLyLoaiSP.resources
+D:\KI_5\C#\DoAn\ProjectLTUD_S2\DienMay\DienMay\obj\Debug\DienMay.FrmThemLoaiSP.resources
+D:\KI_5\C#\DoAn\ProjectLTUD_S2\DienMay\DienMay\obj\Debug\DienMay.FrmTrangChu.resources
+D:\KI_5\C#\DoAn\ProjectLTUD_S2\DienMay\DienMay\obj\Debug\DienMay.FromChiTietSP.resources
