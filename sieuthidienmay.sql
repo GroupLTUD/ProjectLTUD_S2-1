@@ -1,5 +1,6 @@
 CREATE DATABASE SIEUTHIDIENMAY
-
+go
+use SIEUTHIDIENMAY
 -- Huyen Nguyen TYPES, MANUFACTURES, PRODUCTS
 CREATE TABLE TYPES
 (
@@ -18,6 +19,7 @@ CREATE TABLE PRODUCTS
 (
 ID INT NOT NULL PRIMARY KEY
 ,NAME NVARCHAR(50)
+,IMG NVARCHAR(200)
 ,DESCRIBE NVARCHAR(200)
 ,PRICE MONEY
 ,TYPE_ID INT NOT NULL
@@ -110,25 +112,27 @@ ALTER TABLE FEEDBACK ADD FOREIGN KEY (USER_ID) REFERENCES USERS(ID)
 
 --store ADD PRODUCT
 go
-CREATE PROC sp_Add_PRODUCT
+CREATE PROC ADD_PRODUCT
 (
  @ID INT 
 ,@NAME NVARCHAR(50)
+,@IMG NVARCHAR(200)
 ,@PRICE MONEY
 ,@DESCRIBE NVARCHAR(200)
 ,@TYPE_ID INT 
 ,@MANU_ID INT
 )
 as
-INSERT INTO PRODUCTS(ID, NAME,PRICE ,DESCRIBE,TYPE_ID,MANU_ID) 
-VALUES (@ID,@NAME, @PRICE, @DESCRIBE, @TYPE_ID,@MANU_ID)
+INSERT INTO PRODUCTS(ID, NAME,IMG , DESCRIBE, TYPE_ID, MANU_ID) 
+VALUES (@ID, @NAME, @IMG, @PRICE, @DESCRIBE, @TYPE_ID,@MANU_ID)
 
 --STORED UPDATE PRODUCTS
 go
-create proc sp_Update_PRODUCT
+create proc UPDATE_PRODUCT
 (
  @ID INT 
 ,@NAME NVARCHAR(50)
+,@IMG NVARCHAR(200)
 ,@PRICE MONEY
 ,@DESCRIBE NVARCHAR(200)
 ,@TYPE_ID INT 
@@ -136,7 +140,9 @@ create proc sp_Update_PRODUCT
 )
 as
 update PRODUCTS 
-set  NAME= @NAME	
+set  
+NAME = @NAME	
+,IMG = @IMG 
 ,PRICE=@PRICE
 ,DESCRIBE =@DESCRIBE
 ,TYPE_ID =@TYPE_ID
@@ -145,7 +151,7 @@ where ID = @ID
 
 --STORED DELETE PRODUCT
 go
-create proc sp_Delete_PRODUCT 
+create proc DELETE_PRODUCT 
 (
 @ID INT
 )
@@ -156,7 +162,7 @@ where ID=@ID
 
 --STORE GET ALL PRODUCT
 go
-CREATE PROC sp_All_PRODUCT
+CREATE PROC All_PRODUCT
 AS
  SELECT * FROM PRODUCTS
  
@@ -170,10 +176,10 @@ INSERT INTO TYPES VALUES (2,'LAPTOP')
 INSERT INTO TYPES VALUES (3,'TABLET')
 
 -- chen san pham
-EXEC sp_Add_Product 1,'samsung J7 Prime',2000000,'mot san pham moi',1,1
-EXEC sp_Add_Product 2,'iphone X',2500000,'mot san pham moi cua apple',2,1
+EXEC ADD_Product 1,'samsung J7 Prime','3.jpg',2000000,'mot san pham moi',1,1
+EXEC ADD_Product 2,'iphone X','2.png',2500000,'mot san pham moi cua apple',2,1
 -- xem tat ca san pham
- exec sp_All_PRODUCT
+ exec All_PRODUCT
 
 ---------=== Hoang - STORE ===----------
 --CHEN Position VA Department
@@ -182,13 +188,13 @@ INSERT INTO DEPARTMENT VALUES (3, 'Nhan vien')
 
 --STORE Add Employees
 go
-create proc sp_Add_Employee(@manv int, @tennv nvarchar(50),@ngaysinhnv date, @luongnv int, @username nvarchar(50), @pass nvarchar(50), @p_id int, @d_id int)
+create proc ADD_EMPLOYEE(@manv int, @tennv nvarchar(50),@ngaysinhnv date, @luongnv int, @username nvarchar(50), @pass nvarchar(50), @p_id int, @d_id int)
 as
 insert into EMPLOYEES values (@manv, @tennv, @ngaysinhnv, @luongnv, @username, @pass, @p_id, @d_id)
 
 --STORE UPDATE EMPLOYEES
 go
-create proc sp_Update_Employee(@id int, @tennv nvarchar(50),@ngaysinhnv date, @luongnv int, @username nvarchar(50), @pass nvarchar(50), @p_id int, @d_id int)
+create proc UPDATE_EMPLOYEE(@id int, @tennv nvarchar(50),@ngaysinhnv date, @luongnv int, @username nvarchar(50), @pass nvarchar(50), @p_id int, @d_id int)
 as
 update EMPLOYEES
 set ID = @id
@@ -203,7 +209,7 @@ where id = @id
 
 --STORE DELETE EMPLOYEES
 go
-create proc sp_Delete_Employee(@manv int)
+create proc DELETE_EMPLOYEE(@manv int)
 as
 delete
 from EMPLOYEES
@@ -211,7 +217,7 @@ where ID=@manv
 
 --STORE ALL EMPLOYEE
 go
-create proc sp_All_Employee
+create proc ALL_EMPLOYEE
 as
 SELECT * FROM EMPLOYEES
 
@@ -226,12 +232,12 @@ INSERT INTO DEPARTMENT VALUES (2,'AN NINH')
 INSERT INTO DEPARTMENT VALUES (3,'MARKETING')
 
 --- chay store cua Employee
-exec sp_All_Employee
+exec ALL_EMPLOYEE
 
 ---------=== Duy - STORE ===------------
 -- STORED ADD USER
 go
-CREATE PROC sp_Add_User
+CREATE PROC ADD_USER
 (
 @ID INT 
 ,@USERNAME NVARCHAR(50)
@@ -245,7 +251,7 @@ VALUES (@ID,@USERNAME, @PASS, @EMAIL, @PHONE)
 
 --STORED UPDATE USER
 go
-create proc sp_Update_USER
+create proc UPDATE_USER
 (
 @ID INT 
 ,@USERNAME NVARCHAR(50)
@@ -263,7 +269,7 @@ where ID = @ID
 
 --STORED DELETE USER
 go
-create proc sp_Delete_USER
+create proc DELETE_USER
 (
 @ID INT
 )
@@ -274,20 +280,20 @@ where ID=@ID
 
 -- STORED GET ALL USER
 go
-CREATE PROC sp_All_USER
+CREATE PROC ALL_USER
 AS
  SELECT * FROM USERS
  
 
 -- STORE ADD INVOICE
  GO
- CREATE PROC sp_Add_INVOICE(@ID INT,@NGAYBAN DATE,@USER_ID INT,@PRODUCT_ID INT,@EMPLOYEE_ID INT)
+ CREATE PROC ADD_INVOICE(@ID INT,@NGAYBAN DATE,@USER_ID INT,@PRODUCT_ID INT,@EMPLOYEE_ID INT)
  AS
  INSERT INTO INVOICE VALUES (@ID,@NGAYBAN,@USER_ID,@PRODUCT_ID,@EMPLOYEE_ID)
  
 -- STORE UPDATE INVOICE
 GO
-CREATE PROC sp_Update_INVOICE(@ID INT,@NGAYBAN DATE,@USER_ID INT,@PRODUCT_ID INT,@EMPLOYEE_ID INT) 
+CREATE PROC UPDATE_INVOICE(@ID INT,@NGAYBAN DATE,@USER_ID INT,@PRODUCT_ID INT,@EMPLOYEE_ID INT) 
 AS
 update INVOICE 
 set  NGAYBAN = @NGAYBAN	
@@ -298,7 +304,7 @@ where ID = @ID
 
 -- STORE DELETE INVOICE
 go
-create proc sp_Delete_INVOICE (@ID INT)
+create proc DELETE_INVOICE (@ID INT)
 as
 delete
 from INVOICE
@@ -306,13 +312,13 @@ where ID=@ID
 
 -- STORE ALL INVOICE
 go
-CREATE PROC sp_All_INVOICE
+CREATE PROC ALL_INVOICE
 AS
  SELECT * FROM INVOICE
  
 ---STORE ADD SHOPCART
 go
-CREATE PROC sp_Add_SHOPCART
+CREATE PROC ADD_SHOPCART
 (
 @ID INT 
 ,@USER_ID INT 
@@ -324,7 +330,7 @@ VALUES (@ID,@USER_ID, @PRODUCT_ID)
 
 ---STORE UPDATE SHOPCART
 go
-create proc sp_Update_SHOPCART
+create proc UPDATE_SHOPCART
 (
 @ID INT 
 ,@USER_ID INT 
@@ -338,7 +344,7 @@ where ID = @ID
 
 --STORE DELETE SHOPCART
 go
-create proc sp_Delete_SHOPCART
+create proc DELETE_SHOPCART
 (
 @ID INT
 )
@@ -350,15 +356,14 @@ where ID=@ID
 --STORE ALL SHOPCART
 
 go
-CREATE PROC sp_All_SHOPCART
+CREATE PROC ALL_SHOPCART
 AS
  SELECT * FROM SHOPCART
  
- exec sp_All_SHOPCART
-
+ exec ALL_SHOPCART
 ---STORE ADD FEEDBACK
 go
-CREATE PROC sp_Add_FEEDBACK
+CREATE PROC ADD_FEEDBACK
 (
 @ID INT 
 ,@TITLE NVARCHAR(50)
@@ -371,7 +376,7 @@ VALUES (@ID,@TITLE, @DESCRIBE,@USER_ID)
 
 ---STORE UPDATE FEEDBACK
 go
-create proc sp_Update_FEEDBACK
+create proc UPDATE_FEEDBACK
 (
 @ID INT 
 ,@TITLE NVARCHAR(50)
@@ -387,7 +392,7 @@ where ID = @ID
 
 --STORE DELETE FEEDBACK
 go
-create proc sp_Delete_FEEDBACK
+create proc DELETE_FEEDBACK
 (
 @ID INT
 )
@@ -399,8 +404,8 @@ where ID=@ID
 --STORED ALL FEEDBACK
 
 go
-CREATE PROC sp_All_FEEDBACK
+CREATE PROC ALL_FEEDBACK
 AS
  SELECT * FROM FEEDBACK
  
- exec sp_All_FEEDBACK
+ exec ALL_FEEDBACK
